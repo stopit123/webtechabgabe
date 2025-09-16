@@ -16,10 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
-import { Employee } from '../employee';
+import { Medium } from '../medium';
 
 @Component({
-  selector: 'app-employee-form',
+  selector: 'app-medium-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -29,7 +29,7 @@ import { Employee } from '../employee';
     MatButtonModule,
   ],
   styles: `
-    .employee-form {
+    .medium-form {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -44,9 +44,9 @@ import { Employee } from '../employee';
   `,
   template: `
     <form
-      class="employee-form"
+      class="medium-form"
       autocomplete="off"
-      [formGroup]="employeeForm"
+      [formGroup]="mediumForm"
       (submit)="submitForm()"
     >
       <mat-form-field>
@@ -58,27 +58,27 @@ import { Employee } from '../employee';
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Position</mat-label>
+        <mat-label>Inhalt</mat-label>
         <input
           matInput
-          placeholder="Position"
-          formControlName="position"
+          placeholder="Inhalt"
+          formControlName="inhalt"
           required
         />
-        @if (position.invalid) {
-        <mat-error>Position must be at least 5 characters long.</mat-error>
+        @if (inhalt.invalid) {
+        <mat-error>Inhalt must be at least 5 characters long.</mat-error>
         }
       </mat-form-field>
 
-      <mat-radio-group formControlName="level" aria-label="Select an option">
-        <mat-radio-button name="level" value="junior" required
-          >Junior</mat-radio-button
+      <mat-radio-group formControlName="format" aria-label="Select an option">
+        <mat-radio-button name="format" value="film" required
+          >Film</mat-radio-button
         >
-        <mat-radio-button name="level" value="mid"
-          >Mid</mat-radio-button
+        <mat-radio-button name="format" value="serie"
+          >Serie</mat-radio-button
         >
-        <mat-radio-button name="level" value="senior"
-          >Senior</mat-radio-button
+        <mat-radio-button name="format" value="buch"
+          >Buch</mat-radio-button
         >
       </mat-radio-group>
       <br />
@@ -86,53 +86,53 @@ import { Employee } from '../employee';
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="employeeForm.invalid"
+        [disabled]="mediumForm.invalid"
       >
         Add
       </button>
     </form>
   `,
 })
-export class EmployeeFormComponent implements OnInit {
-  initialState = input<Employee>();
+export class MediumFormComponent implements OnInit {
+  initialState = input<Medium>();
 
   @Output()
-  formValuesChanged = new EventEmitter<Employee>();
+  formValuesChanged = new EventEmitter<Medium>();
 
   @Output()
-  formSubmitted = new EventEmitter<Employee>();
+  formSubmitted = new EventEmitter<Medium>();
 
-  employeeForm!: FormGroup;
+  mediumForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.employeeForm = this.formBuilder.group({
+    this.mediumForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      position: ['', [Validators.required, Validators.minLength(5)]],
-      level: ['junior', [Validators.required]],
+      inhalt: ['', [Validators.required, Validators.minLength(5)]],
+      format: ['film', [Validators.required]],
     });
 
     effect(() => {
-      this.employeeForm.setValue({
+      this.mediumForm.setValue({
         name: this.initialState()?.name || '',
-        position: this.initialState()?.position || '',
-        level: this.initialState()?.level || 'junior',
+        inhalt: this.initialState()?.inhalt || '',
+        format: this.initialState()?.format || 'film',
       });
     });
   }
 
   get name() {
-    return this.employeeForm.get('name')!;
+    return this.mediumForm.get('name')!;
   }
-  get position() {
-    return this.employeeForm.get('position')!;
+  get inhalt() {
+    return this.mediumForm.get('inhalt')!;
   }
-  get level() {
-    return this.employeeForm.get('level')!;
+  get format() {
+    return this.mediumForm.get('format')!;
   }
 
   submitForm() {
-    this.formSubmitted.emit(this.employeeForm.value as Employee);
+    this.formSubmitted.emit(this.mediumForm.value as Medium);
   }
 }

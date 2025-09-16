@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EmployeesListComponent } from './employees-list/employees-list.component';
+import { MedienListComponent } from './medien-list/medium-list.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, EmployeesListComponent, MatToolbarModule],
+  imports: [RouterOutlet, MedienListComponent, MatToolbarModule],
   styles: [
     `
       main {

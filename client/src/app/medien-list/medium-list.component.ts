@@ -1,13 +1,13 @@
 import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
+import { Medium } from '../medium';
+import { MediumService } from '../medium.service';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-employees-list',
+  selector: 'app-medien-list',
   standalone: true,
   imports: [RouterModule, MatTableModule, MatButtonModule, MatCardModule],
   styles: [
@@ -24,21 +24,21 @@ import { MatCardModule } from '@angular/material/card';
   template: `
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Employees List</mat-card-title>
+        <mat-card-title>Medien List</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <table mat-table [dataSource]="employees$()">
+        <table mat-table [dataSource]="medien$()">
           <ng-container matColumnDef="col-name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element">{{ element.name }}</td>
           </ng-container>
-          <ng-container matColumnDef="col-position">
-            <th mat-header-cell *matHeaderCellDef>Position</th>
-            <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+          <ng-container matColumnDef="col-inhalt">
+            <th mat-header-cell *matHeaderCellDef>Inhalt</th>
+            <td mat-cell *matCellDef="let element">{{ element.inhalt }}</td>
           </ng-container>
-          <ng-container matColumnDef="col-level">
-            <th mat-header-cell *matHeaderCellDef>Level</th>
-            <td mat-cell *matCellDef="let element">{{ element.level }}</td>
+          <ng-container matColumnDef="col-format">
+            <th mat-header-cell *matHeaderCellDef>Format</th>
+            <td mat-cell *matCellDef="let element">{{ element.format }}</td>
           </ng-container>
           <ng-container matColumnDef="col-action">
             <th mat-header-cell *matHeaderCellDef>Action</th>
@@ -49,7 +49,7 @@ import { MatCardModule } from '@angular/material/card';
               <button
                 mat-raised-button
                 color="warn"
-                (click)="deleteEmployee(element._id || '')"
+                (click)="deleteMedium(element._id || '')"
               >
                 Delete
               </button>
@@ -62,35 +62,35 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" [routerLink]="['new']">
-          Add a New Employee
+          Add a New Medium
         </button>
       </mat-card-actions>
     </mat-card>
   `,
 })
-export class EmployeesListComponent implements OnInit {
-  employees$ = {} as WritableSignal<Employee[]>;
+export class MedienListComponent implements OnInit {
+  medien$ = {} as WritableSignal<Medium[]>;
   displayedColumns: string[] = [
     'col-name',
-    'col-position',
-    'col-level',
+    'col-inhalt',
+    'col-format',
     'col-action',
   ];
 
-  constructor(private employeesService: EmployeeService) {}
+  constructor(private medienService: MediumService) {}
 
   ngOnInit() {
-    this.fetchEmployees();
+    this.fetchMedien();
   }
 
-  deleteEmployee(id: string): void {
-    this.employeesService.deleteEmployee(id).subscribe({
-      next: () => this.fetchEmployees(),
+  deleteMedium(id: string): void {
+    this.medienService.deleteMedium(id).subscribe({
+      next: () => this.fetchMedien(),
     });
   }
 
-  private fetchEmployees(): void {
-    this.employees$ = this.employeesService.employees$;
-    this.employeesService.getEmployees();
+  private fetchMedien(): void {
+    this.medien$ = this.medienService.medien$;
+    this.medienService.getMedien();
   }
 }

@@ -1,8 +1,8 @@
 import * as mongodb from "mongodb";
-import { Employee } from "./employee";
+import { Medium } from "./medium";
 
 export const collections: {
-    employees?: mongodb.Collection<Employee>;
+    medien?: mongodb.Collection<Medium>;
 } = {};
 
 export async function connectToDatabase(uri: string) {
@@ -12,15 +12,15 @@ export async function connectToDatabase(uri: string) {
     const db = client.db("meanStackExample");
     await applySchemaValidation(db);
 
-    const employeesCollection = db.collection<Employee>("employees");
-    collections.employees = employeesCollection;
+    const medienCollection = db.collection<Medium>("medien");
+    collections.medien = medienCollection;
 }
 
 async function applySchemaValidation(db: mongodb.Db) {
     const jsonSchema = {
         $jsonSchema: {
             bsonType: "object",
-            required: ["name", "position", "level"],
+            required: ["name", "inhalt", "format"],
             additionalProperties: false,
             properties: {
                 _id: {},
@@ -28,27 +28,26 @@ async function applySchemaValidation(db: mongodb.Db) {
                     bsonType: "string",
                     description: "'name' is required and is a string",
                 },
-                position: {
+                inhalt: {
                     bsonType: "string",
-                    description: "'position' is required and is a string",
+                    description: "'inhalt' is required and is a string",
                     minLength: 5
                 },
-                level: {
+                format: {
                     bsonType: "string",
-                    description: "'level' is required and is one of 'junior', 'mid', or 'senior'",
-                    enum: ["junior", "mid", "senior"],
+                    description: "'format' is required and is one of 'film', 'serie', or 'buch'",
+                    enum: ["film", "serie", "buch"],
                 },
             },
         },
     };
 
-    // Try applying the modification to the collection, if the collection doesn't exist, create it
    await db.command({
-        collMod: "employees",
+        collMod: "medien",
         validator: jsonSchema
     }).catch(async (error: mongodb.MongoServerError) => {
         if (error.codeName === "NamespaceNotFound") {
-            await db.createCollection("employees", {validator: jsonSchema});
+            await db.createCollection("medien", {validator: jsonSchema});
         }
     });
 }
