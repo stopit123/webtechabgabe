@@ -53,7 +53,7 @@ import { Medium } from '../medium';
         <mat-label>Name</mat-label>
         <input matInput placeholder="Name" formControlName="name" required />
         @if (name.invalid) {
-        <mat-error>Name must be at least 3 characters long.</mat-error>
+        <mat-error>Bitte mindestens 3 Zeichen! 😡</mat-error>
         }
       </mat-form-field>
 
@@ -66,11 +66,11 @@ import { Medium } from '../medium';
           required
         />
         @if (inhalt.invalid) {
-        <mat-error>Inhalt must be at least 5 characters long.</mat-error>
+        <mat-error>Bitte mindestens 5 Zeichen! 😡</mat-error>
         }
       </mat-form-field>
 
-      <mat-radio-group formControlName="format" aria-label="Select an option">
+      <mat-radio-group formControlName="format" aria-label="Bitte wähle ein Format aus! 😁">
         <mat-radio-button name="format" value="film" required
           >Film</mat-radio-button
         >
@@ -110,7 +110,7 @@ export class MediumFormComponent implements OnInit {
     this.mediumForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       inhalt: ['', [Validators.required, Validators.minLength(5)]],
-      format: ['film', [Validators.required]],
+      format: ['', [Validators.required]],
     });
 
     effect(() => {

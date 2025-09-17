@@ -35,7 +35,7 @@ export class AddMediumComponent {
         this.router.navigate(['/']);
       },
       error: (error) => {
-        alert('Failed to create medium');
+        alert('Oops! Es gibt wohl einen Fehler bei dem Hinzufügen eines Mediums. 😬');
         console.error(error);
       },
     });

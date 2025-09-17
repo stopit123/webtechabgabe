@@ -11,15 +11,23 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     `
       main {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         padding: 2rem 4rem;
+      }
+
+      .gif {
+        max-width: 300px;
+        margin-top: 1rem;
+        border-radius: 12px;
       }
     `,
   ],
   template: `
     <mat-toolbar>
-      <span>Management System</span>
+      <span>Eileen's Entertainment Liste</span>
     </mat-toolbar>
+
     <main>
       <router-outlet />
     </main>
