@@ -13,10 +13,12 @@ Medien können dabei angelegt, angesehen, verändert und gelöscht werden.
 Benötigt: Node.js, Git, Angular (npm install -g @angular/cli)
 
 ## 1. Repository clonen
+```bash
 git init
 git clone https://gitlab.rz.htw-berlin.de/Eileen.Al-Rubaiee/webtech.git
+```
 
-## 2. Öffnen von zwei Terminals
+## 2. Öffnen von zwei Terminals für das Backend und Frontend
 ```bash
 cd server
 npm install
