@@ -19,12 +19,16 @@ import { MatCardModule } from '@angular/material/card';
           margin-right: 1rem;
         }
       }
+       mat-card-title {
+        font-size: 1.5rem;
+        color: purple;
+      }
     `,
   ],
   template: `
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Medien List</mat-card-title>
+        <mat-card-title>Bücher, Filme und Serien gegen Langeweile</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <table mat-table [dataSource]="medien$()">
@@ -44,14 +48,14 @@ import { MatCardModule } from '@angular/material/card';
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button [routerLink]="['edit/', element._id]">
-                Edit
+                Bearbeiten
               </button>
               <button
                 mat-raised-button
                 color="warn"
                 (click)="deleteMedium(element._id || '')"
               >
-                Delete
+                Löschen
               </button>
             </td>
           </ng-container>
@@ -62,7 +66,7 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" [routerLink]="['new']">
-          Add a New Medium
+          Füge ein neues Medium hinzu
         </button>
       </mat-card-actions>
     </mat-card>

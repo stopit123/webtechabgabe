@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
   template: `
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Add a New Medium</mat-card-title>
+        <mat-card-title>Füge ein neues Medium hinzu</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <app-medium-form
@@ -30,6 +30,9 @@ export class AddMediumComponent {
   ) {}
 
   addMedium(medium: Medium) {
+    medium.format = (medium.format.charAt(0).toUpperCase() + medium.format.slice(1).toLowerCase()) as "Buch" | "Serie" | "Film";
+
+
     this.mediumService.createMedium(medium).subscribe({
       next: () => {
         this.router.navigate(['/']);
@@ -39,6 +42,7 @@ export class AddMediumComponent {
         console.error(error);
       },
     });
+
     this.mediumService.getMedien();
   }
 }

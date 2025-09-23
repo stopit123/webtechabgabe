@@ -71,13 +71,13 @@ import { Medium } from '../medium';
       </mat-form-field>
 
       <mat-radio-group formControlName="format" aria-label="Bitte wähle ein Format aus! 😁">
-        <mat-radio-button name="format" value="film" required
+        <mat-radio-button name="format" value="Film" required
           >Film</mat-radio-button
         >
-        <mat-radio-button name="format" value="serie"
+        <mat-radio-button name="format" value="Serie"
           >Serie</mat-radio-button
         >
-        <mat-radio-button name="format" value="buch"
+        <mat-radio-button name="format" value="Buch"
           >Buch</mat-radio-button
         >
       </mat-radio-group>
@@ -88,7 +88,7 @@ import { Medium } from '../medium';
         type="submit"
         [disabled]="mediumForm.invalid"
       >
-        Add
+        Hinzufügen
       </button>
     </form>
   `,
@@ -117,7 +117,7 @@ export class MediumFormComponent implements OnInit {
       this.mediumForm.setValue({
         name: this.initialState()?.name || '',
         inhalt: this.initialState()?.inhalt || '',
-        format: this.initialState()?.format || 'film',
+        format: this.initialState()?.format || '',
       });
     });
   }

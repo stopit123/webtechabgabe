@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
   template: `
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Edit a Medium</mat-card-title>
+        <mat-card-title>Bearbeite ein Medium</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <app-medium-form
@@ -51,7 +51,7 @@ export class EditMediumComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (error) => {
-          alert('Failed to update medium');
+          alert('Fehler beim Updaten des Mediums');
           console.error(error);
         },
       });

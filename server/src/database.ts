@@ -9,7 +9,7 @@ export async function connectToDatabase(uri: string) {
     const client = new mongodb.MongoClient(uri);
     await client.connect();
 
-    const db = client.db("meanStackExample");
+    const db = client.db("MedienDatenbank");
     await applySchemaValidation(db);
 
     const medienCollection = db.collection<Medium>("medien");
@@ -35,8 +35,8 @@ async function applySchemaValidation(db: mongodb.Db) {
                 },
                 format: {
                     bsonType: "string",
-                    description: "'format' is required and is one of 'film', 'serie', or 'buch'",
-                    enum: ["film", "serie", "buch"],
+                    description: "'format' is required and is one of 'Film', 'Serie', or 'Buch'",
+                    enum: ["Film", "Serie", "Buch"],
                 },
             },
         },
