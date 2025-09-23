@@ -21,6 +21,7 @@ git clone https://gitlab.rz.htw-berlin.de/Eileen.Al-Rubaiee/webtech.git
 cd server
 npm install
 npx ts-node src/server.ts
+```
 
 ![Screenshot Terminal](<Foto Backend.png>)
 
@@ -28,6 +29,8 @@ npx ts-node src/server.ts
 cd client 
 npm install
 ng serve -o
+```
+
 
 ![Screenshot Terminal](<Foto Frontend.png>)
 
