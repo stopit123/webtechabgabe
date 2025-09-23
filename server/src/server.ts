@@ -4,30 +4,34 @@ import cors from "cors";
 import { mediumRouter } from "./medium.routes";
 import { connectToDatabase } from "./database";
 
-
-
 dotenv.config();
 
-const { ATLAS_URI } = process.env;
+const { ATLAS_URI, PORT, FRONTEND_URL } = process.env;
 
 if (!ATLAS_URI) {
   console.error(
-    "No ATLAS_URI environment variable has been defined in config.env"
+    "No ATLAS_URI environment variable has been defined in .env"
   );
   process.exit(1);
 }
 
+const port = PORT ? parseInt(PORT) : 5200;
+
 connectToDatabase(ATLAS_URI)
   .then(() => {
     const app = express();
-    app.use(cors());
+
+    app.use(cors({
+      origin: FRONTEND_URL || '*'  
+    }));
+
+
+    app.use(express.json());
 
     app.use("/medien", mediumRouter);
- 
-    app.listen(5200, () => {
-      console.log(`Server running at http://localhost:5200...`);
+
+    app.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}...`);
     });
   })
   .catch((error) => console.error(error));
-
-  

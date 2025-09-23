@@ -6,7 +6,7 @@ import { Medium } from './medium';
   providedIn: 'root'
 })
 export class MediumService {
-  private url = 'http://localhost:5200';
+  private url = 'https://webtech-backend-z9ks.onrender.com';
   medien$ = signal<Medium[]>([]);
   medium$ = signal<Medium>({} as Medium);
  
