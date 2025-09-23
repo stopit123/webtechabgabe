@@ -22,7 +22,7 @@ connectToDatabase(ATLAS_URI)
     const app = express();
 
     app.use(cors({
-      origin: FRONTEND_URL || '*'  
+      origin: 'https://entertainmentliste.netlify.app' 
     }));
 
 
