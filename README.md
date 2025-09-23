@@ -17,13 +17,16 @@ git init
 git clone https://gitlab.rz.htw-berlin.de/Eileen.Al-Rubaiee/webtech.git
 
 ## 2. Öffnen von zwei Terminals
+```bash
 cd server
+npm install
 npx ts-node src/server.ts
 
 ![Screenshot Terminal](<Foto Backend.png>)
 
-
+```bash
 cd client 
+npm install
 ng serve -o
 
 ![Screenshot Terminal](<Foto Frontend.png>)
@@ -38,6 +41,7 @@ Um einen besseren Überblick über meine Daten zu haben, habe ich MongoDB Compas
 
 ## 4. Hinweise zur Nutzung von KI
 Für meine Webapp habe ich ein animiertes GIF als Hintergrund verwendet. Ich war mir zunächst unsicher, ob das Einfügen sich von einem normalen Bild unterscheidet. Mithilfe von ChatGPT habe ich eine Anleitung erstellt bekommen, wie man das GIF korrekt herunterlädt und einbindet.
+Zudem habe ich ChatGPT genutzt um mir Beispieleinträge generieren zu lassen. 
 
 
 
